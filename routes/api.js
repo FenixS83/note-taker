@@ -1,74 +1,74 @@
-import express from `express`;
-import fs from `fs/promises`;
-import {v4 as UUIDv4} from `uuid`;
+import express from 'express';
+import fs from 'fs/promises';
+import { v4 as UUIDv4 } from 'uuid';
 
-
-const routerAPI = express.Router();
-
+//router for /api requests, responses are typically restful
+const router = express.Router();
 
 /**
+ * Reads local database file, parses it, and returns it as an object
  * @async
- * @returns {Promise<object[]> }
+ * @returns { Promise<object[]> } database object
  */
 const readDataBase = async () => {
     let json;
     try {
-        json = await fs.readFile(`db/db.json`, {encoding: `utf8` }, (err, data) => {
+        json = await fs.readFile('db/db.json', { encoding: 'utf8' }, (err, data) => {
             err ? console.error(err) : null;
             return data;
         });
         json = JSON.parse(json);
     } catch (error) {
-        console.error(`Retrieving DB failed`, error);
+        console.error('Retrieving DB failed', error);
     }
     return json;
 };
 
 /**
- * @param {object} newDataBase
+ * Given an object, the function writes the string to the database.
+ * @param {object} newDataBase 
  */
-
 const writeDataBase = (newDataBase) => {
-    let dataBaseString = JSON.stringify(newDataBase, null, `   `);
-    fs.writeFile(`db/db.json`, dataBaseString, (err) => {
+    let dataBaseString = JSON.stringify(newDataBase, null, '    ');
+    fs.writeFile('db/db.json', dataBaseString, (err) => {
         err ? console.error(err) : null;
     });
 };
 
-
-
-
-router.get(`/notes`, async (req, res) => {
+/**
+ * Responds with DB
+ */
+router.get('/notes', async (req, res) => {
     const data = await readDataBase();
     res.json(data);
 });
 
-
-
-
-router.post(`/notes`, async (req, res) => {
+/**
+ * Adds req JSON to DB, after adding new ID property, then responds with new DB
+ */
+router.post('/notes', async (req, res) => {
+    //bind JSON from request
     const newNote = req.body;
+    //add ID to JSON
     newNote.id = UUIDv4();
+    //Read database file in, then add new object to it
     const dataBase = await readDataBase();
     dataBase.push(newNote);
+    //Rewrite Database file to disk
     writeDataBase(dataBase);
+    //respond with new database JSON
     res.json(dataBase);
 });
 
-
-
-
-
-
-
-
-
-router.delete(`/notes/:id`, async (req, res) => {
+/**
+ * Deletes note with given ID from the database. 
+ */
+router.delete('/notes/:id', async (req, res) => {
     const dataBase = await readDataBase();
-
-    dataBase.splice(dataBase.findIndex(({ id }) => id == req.params.id), 1 );
+    //filters out given ID
+    dataBase.splice(dataBase.findIndex(({ id }) => id == req.params.id), 1);
     writeDataBase(dataBase);
-    res.sendFile(`${req.params.id} deleted`);
+    res.send(`${req.params.id} deleted`);
 });
 
 export default router;

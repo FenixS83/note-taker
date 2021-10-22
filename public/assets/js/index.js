@@ -32,7 +32,7 @@ const getNotes = () =>
       'Content-Type': 'application/json',
     },
   });
-  
+
 const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
@@ -89,7 +89,7 @@ const handleNoteDelete = (e) => {
     activeNote = {};
   }
 
-  deleteNote(noteId).then(() => {    
+  deleteNote(noteId).then(() => {
     getAndRenderNotes();
     renderActiveNote();
   });
@@ -103,7 +103,7 @@ const handleNoteView = (e) => {
 };
 
 // Sets the activeNote to and empty object and allows the user to enter a new note
-const handleNewNoteView = (e) => {
+const handleNewNoteView = () => {
   activeNote = {};
   renderActiveNote();
 };
@@ -180,4 +180,3 @@ if (window.location.pathname === '/notes') {
   noteText.addEventListener('keyup', handleRenderSaveBtn);
 }
 
-getAndRenderNotes();
