@@ -1,3 +1,4 @@
+<!-- Note Taker ReadMe -->
 # Note Taker
 
   ![GitHub:MIT](https://img.shields.io/github/license/FenixS83/readme-generator?style=flat-square)

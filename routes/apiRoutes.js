@@ -33,12 +33,12 @@ router.post('/notes', (req, res) => {
     }
 })
 
-// Bonus - DELETE request
+// DELETE note request function
 router.delete('/notes/:id', (req, res) => {
     console.log(req.params.id);
     deleteNote(req.params.id, './db/db.json');
     res.json('success');
 });
 
-// Export
+// Export function
 module.exports = router;
