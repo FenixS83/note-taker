@@ -8,6 +8,8 @@
   
   Click the link below to visit my deployed page.
 
+  https://fenix-sampson-note-taker.herokuapp.com/
+
   <!-- [URL](undefined) -->
 
   ## Table of Contents
@@ -61,11 +63,13 @@
 
   ## Visualization
 
-  placeholder to add images or other media
+  ![Note Taker landing page](./images/note_taker_landing_page.png)
+
+  ![Note Taker note page](./images/note_taker-note-page.png)
 
   ## Acknowledgements
 
-  
+  Many thanks to Brent Graves and Gabriel Cavalcante Causin for being excellent study partners and helping me to understand the topics that I needed assitance in.
 
   ## Contributions
 
@@ -74,6 +78,8 @@
   ## Resources
  
   Express.js
+  Node.js
+  Heroku
 
   ## License
 
