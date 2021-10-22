@@ -46,6 +46,14 @@ router.get(`/notes`, async (req, res) => {
 
 
 
+router.post(`/notes`, async (req, res) => {
+    const newNote = req.body;
+    newNote.id = UUIDv4();
+    const dataBase = await readDataBase();
+    dataBase.push(newNote);
+    writeDataBase(dataBase);
+    res.json(dataBase);
+});
 
 
 
@@ -55,26 +63,12 @@ router.get(`/notes`, async (req, res) => {
 
 
 
+router.delete(`/notes/:id`, async (req, res) => {
+    const dataBase = await readDataBase();
 
-@requires module: express - Router
+    dataBase.splice(dataBase.findIndex(({ id }) => id == req.params.id), 1 );
+    writeDataBase(dataBase);
+    res.sendFile(`${req.params.id} deleted`);
+});
 
-
-
-@requires module: local - uuid
-
-const uuid = require(`../helper/uuid`);
-const readFromFile = util.
-
-
-
-const path = require(`path`);
-
-router.get(`/`, (req, res) => {
-   
-})
-
-router.post(`/notes`, (req, res) => {
-    res.sendFile(path.join(__dirname, `../public/notes.html`));
-})
-
-module.exports = router;
+export default router;
