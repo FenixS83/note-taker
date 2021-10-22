@@ -1,5 +1,21 @@
+const express = require(`express`);
+const fs = require(`fs`);
+const util = require(`util`)
+
+
+@requires module: express - Router
+
+const routerAPI = express.Router();
+
+
+@requires module: local - uuid
+
+const uuid = require(`../helper/uuid`);
+const readFromFile = util.
+
+
+
 const path = require(`path`);
-const router = require(`express`).Router();
 
 router.get(`/`, (req, res) => {
    

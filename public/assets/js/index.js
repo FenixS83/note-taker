@@ -4,8 +4,6 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
-
-
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
@@ -13,7 +11,6 @@ if (window.location.pathname === '/notes') {
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
 }
-
 
 // Show an element
 const show = (elem) => {
@@ -28,41 +25,22 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
-HTMLLIElement(saveNoteBtn)
-
-
 const getNotes = () =>
   fetch('/api/notes', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-  })
-  .then((res) => res.json())
-  .then((data) => {
-    console.log(`Successful GET request:`, data);
-  })
+  });
   
-
-
-function saveNote(note) {
-  return fetch('/api/notes', {
+const saveNote = (note) =>
+  fetch('/api/notes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(note),
-  })
-  .then((res) => res.json())
-  .then((data) => {
-    console.log(`Successful POST request`, data);
-
-    return data
-  })
-  .catch((error) => {
-    console.log(`Error on post request ${error}`)
   });
-}
 
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
@@ -71,8 +49,6 @@ const deleteNote = (id) =>
       'Content-Type': 'application/json',
     },
   });
-
-
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
@@ -113,8 +89,7 @@ const handleNoteDelete = (e) => {
     activeNote = {};
   }
 
-  deleteNote(noteId).then(() => {
-    
+  deleteNote(noteId).then(() => {    
     getAndRenderNotes();
     renderActiveNote();
   });
