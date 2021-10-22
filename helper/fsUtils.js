@@ -24,3 +24,22 @@ const readAndAppend = (content, file) => {
     })
 }
 
+
+const deleteNote = (id, file) => {
+    fs.readFile(file, `utf8`, (err, data) => {
+        if (err) {
+            console.error(err);
+        } else {
+            const parsedData = JSON.parse(data);
+            for (let i=0; i < parsedData.length; i++) {
+                if (parsedData[i].id == id) {
+                    parsedData.splice(i, 1);
+                }
+            }
+            writeToFile(file, parsedData);
+        }
+    })
+}
+
+
+module.exports = {readFromFile, writeToFile, readAndAppend, deleteNote};
