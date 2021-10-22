@@ -1,7 +1,7 @@
+// Required files + modules
 const router = require('express').Router();
-const { readFromFile, readAndAppend, deleteNote } = require('../helpers/fsUtils');
-const uuid = require('../helpers/uuid');
-
+const { readFromFile, readAndAppend, deleteNote } = require('../helper/fsUtils');
+const uuid = require('../helper/uuid');
 
 
 // GET route for retrieving all the notes
