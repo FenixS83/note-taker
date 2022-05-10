@@ -5,12 +5,12 @@ const uuid = require('../helper/uuid');
 
 
 // GET route for retrieving all the notes
-router.get('/notes', (req, res) => {
+router.get('./notes', (req, res) => {
     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 })
 
 // POST route for submitting a new note
-router.post('/notes', (req, res) => {
+router.post('./notes', (req, res) => {
     const { title, text } = req.body;
     // If title and text was entered...
     if (title && text) {
@@ -34,7 +34,7 @@ router.post('/notes', (req, res) => {
 })
 
 // DELETE note request function
-router.delete('/notes/:id', (req, res) => {
+router.delete('./notes/:id', (req, res) => {
     console.log(req.params.id);
     deleteNote(req.params.id, './db/db.json');
     res.json('success');
