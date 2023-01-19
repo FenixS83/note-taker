@@ -9,7 +9,7 @@
   
   Click the link below to visit my deployed page.
 
-  https://fenix-sampson-note-taker.herokuapp.com/
+  https://fenixs-note-taker-p5x7.onrender.com/
 
   <!-- [URL](undefined) -->
 
